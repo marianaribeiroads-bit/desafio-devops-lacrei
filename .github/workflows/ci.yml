@@ -1,17 +1,18 @@
-name: CI Pipeline
+name: CI/CD Pipeline - Lacrei Saúde
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "develop" ]
 
 jobs:
   build-and-test:
+    name: Build & Teste da Aplicação
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do código
+      - name: Checkout do Código
         uses: actions/checkout@v4
 
       - name: Configurar Node.js
@@ -19,8 +20,26 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Instalar dependências
+      - name: Instalar Dependências
         run: npm install
 
       - name: Testar Build da Imagem Docker
-        run: docker build -t desafio-devops-lacrei . 
+        run: docker build -t desafio-devops-lacrei .
+
+  deploy-staging:
+    name: Deploy para Staging (Homologação)
+    needs: build-and-test
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simulação de Deploy na AWS (Staging)
+        run: echo "Deploy realizado com sucesso no ambiente de Staging (AWS ECS / App Runner)."
+
+  deploy-production:
+    name: Deploy para Produção
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Simulação de Deploy na AWS (Produção)
+        run: echo "Deploy realizado com sucesso no ambiente de Produção (AWS ECS / App Runner)."
