@@ -16,3 +16,28 @@ A aplicação foi projetada para rodar em containers na **AWS** garantindo isola
 ## 🔄 2. Fluxo da Pipeline de CI/CD (GitHub Actions)
 
 O fluxo automatizado é disparado a cada `push` ou `pull request`:
+
+- **Build & Teste:** Validação do código Node.js e compilação do container Docker.
+- **Branch `develop`:** Dispara deploy automatizado para Staging.
+- **Branch `main`:** Dispara deploy automatizado para Produção.
+
+---
+
+## 🔒 3. Checklist de Segurança
+
+Atendendo aos requisitos de tratamento de dados sensíveis da Lacrei Saúde:
+
+- [x] **Gerenciamento de Secrets:** Credenciais tratadas via **GitHub Secrets**.
+- [x] **HTTPS/TLS obrigatório:** Tráfego criptografado na AWS via ACM (AWS Certificate Manager).
+- [x] **CORS:** Middleware configurado no Node.js para restringir requisições não autorizadas.
+- [x] **Princípio do Menor Privilégio:** Roles IAM de execução restritas apenas aos serviços necessários.
+- [x] **Containerização Segura:** Uso de imagem base leve para diminuir superfícies de vulnerabilidade.
+
+---
+
+## 🔄 4. Processo de Rollback Funcional
+
+1. **Reversão via Git (Recomendado):**
+   ```bash
+   git revert HEAD
+   git push origin main
