@@ -1,7 +1,7 @@
 Desafio DevOps — Lacrei Saúde
 Projeto desenvolvido como parte de um desafio prático para uma oportunidade de voluntariado na área de tecnologia.
 
-Sobre o projeto
+Sobre o projeto: 
 O objetivo foi desenvolver e executar uma aplicação utilizando conceitos e ferramentas relacionados à área de DevOps, colocando em prática conhecimentos de desenvolvimento, versionamento de código, containerização e automação.
 
  Tecnologias utilizadas
